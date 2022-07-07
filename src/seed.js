@@ -2,7 +2,7 @@
 // NOTE: replace 'NvPY9M9MzFTARQ6M816YAzDJxZ72' with your Firebase auth user id (can be taken from Firebase)
 
 
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
 export function seedDatabase(FieldValue) {
   const users = [
