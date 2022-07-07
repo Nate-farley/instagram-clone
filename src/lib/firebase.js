@@ -19,7 +19,7 @@ const firebaseConfig = {
   };
 
   const firebase = initializeApp(firebaseConfig);
-  const FieldValue  = getFirestore(firebase);
+  const { FieldValue }  = getFirestore(firebase);
   console.log(FieldValue);
 
   // here im going to call the seeddata funcation to add data to firestore but only ONCE!!
