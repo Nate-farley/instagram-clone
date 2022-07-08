@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState} from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import FirebaseContext from "../context/firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import * as ROUTES from "../constants/routes"
 
 function Login() {
 
@@ -15,7 +17,28 @@ function Login() {
 
         const isInvaild = password === '' || emailAddress === '';
 
-        const handleLogin = () => {};
+        const handleLogin = (event) => {
+            event.preventDefault();
+
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, emailAddress, password)
+              .then((userCredential) => {
+                // Signed in 
+               
+                const user = userCredential.user;
+                console.log(user);
+                history.push(ROUTES.DASHBOARD);
+              })
+              .catch(() => {
+               
+                const errorMessage = "User is not found";
+                setEmailadress('');
+                setPassword('');
+                setError(errorMessage);
+              });
+
+
+        };
 
         useEffect(() => {
 
