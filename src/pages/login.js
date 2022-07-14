@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import FirebaseContext from "../context/firebase";
+
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import * as ROUTES from "../constants/routes"
 
@@ -8,7 +8,7 @@ function Login() {
 
         const history = useNavigate('');
 
-        const { firebase } = useContext(FirebaseContext);
+        
 
         const [ emailAddress, setEmailadress ]= useState('');
         const [ password, setPassword ] = useState('');
@@ -19,7 +19,6 @@ function Login() {
 
         const handleLogin = (event) => {
             event.preventDefault();
-
             const auth = getAuth();
             signInWithEmailAndPassword(auth, emailAddress, password)
               .then((userCredential) => {
@@ -27,7 +26,7 @@ function Login() {
                
                 const user = userCredential.user;
                 console.log(user);
-                history.push(ROUTES.DASHBOARD);
+                history(ROUTES.DASHBOARD);
               })
               .catch(() => {
                
@@ -65,6 +64,7 @@ function Login() {
                             placeholder="Email address"
                             className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                             onChange={({ target }) => setEmailadress(target.value)}
+                            value={emailAddress}
                         />
                         <input
                             aria-label="Enter your password"
@@ -72,6 +72,7 @@ function Login() {
                             placeholder="password"
                             className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
                             onChange={({ target }) => setPassword(target.value)}
+                            value={password}
                         />
                         <button 
                             disabled={isInvaild}
@@ -85,7 +86,7 @@ function Login() {
                 </div>
                 <div className="flex justify-center items-center flex-col w-full bg-white p-4 border border-gray-primary rounded">
                     <p className="text-sm">Don't have an account?{` `}
-                        <Link to="/signup" className="font-bold text-blue-medium" >
+                        <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium" >
                             Sign up
                         </Link>
                     </p>

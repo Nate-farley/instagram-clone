@@ -7,16 +7,16 @@ import {
 import * as ROUTES from "./constants/routes";
 
 export const Login = lazy(() => import('./pages/login'));
+export const SignUp = lazy(() => import('./pages/sign-up'));
 
 function App() {
   return (
     <BrowserRouter>
     <Suspense fallback={<p>Loading ...</p>}>
     <Routes>
-      <Route path={ROUTES.LOGIN}element={<Login />}>
-        <Route path="expenses" element={''} />
-        <Route path="invoices" element={''} />
-      </Route>
+      <Route path={ROUTES.LOGIN} element={<Login />} />
+      <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
+     
     </Routes>
     </Suspense>
   </BrowserRouter>
