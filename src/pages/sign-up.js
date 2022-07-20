@@ -29,7 +29,7 @@ function Signup() {
 
             const usernameExists = await doesUsernameExist(username);
 
-            console.log(username)
+            console.log(usernameExists)
 
             
 
@@ -55,8 +55,9 @@ function Signup() {
                         fullName,
                         emailAddress: emailAddress.toLowerCase(),
                         following: [],
+                        followers: [],
                         dateCreated: Date.now()
-                        });
+                    });
                         
                         console.log("Document written with ID: ", docRef.id);
                         
