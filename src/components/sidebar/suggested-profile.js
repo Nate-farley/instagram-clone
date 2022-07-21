@@ -13,7 +13,7 @@ export default function SuggestedProfile({
   }) {
     const [followed, setFollowed] = useState(false);
 
-   console.log(profileId, username, profileDocId, loggedInUserDocId)
+   //console.log(profileId, username, profileDocId, loggedInUserDocId)
 
     async function handleFollowUser() {
         setFollowed(true);
