@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
 import { memo } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 
-const User = ({ username, fullName }) => 
+const User = ({ username, fullName }) => {
+
+    return (
     !username || !fullName ? (
         <Skeleton count={1} height={61} />
     ) : (
@@ -22,12 +25,14 @@ const User = ({ username, fullName }) =>
                 <p className="text-sm">{fullName}</p>
             </div>
         </Link>
-    );
-  
+        
+    )
+);
+}
 export default User;
 
 User.propTypes = {
-    username: PropTypes.string,
+    username: PropTypes.string.isRequired,
     fullName: PropTypes.string
 };
 
