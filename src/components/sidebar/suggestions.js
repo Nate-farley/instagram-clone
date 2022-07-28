@@ -21,9 +21,7 @@ export default function Suggestions({ userId, following, loggedInUserDocId }) {
       }
     }, [userId]);
  
-    //console.log(profiles);
-    //console.log(userId );
-    //console.log(following);
+  
     
 
     return !profiles ? (
@@ -57,7 +55,7 @@ export default function Suggestions({ userId, following, loggedInUserDocId }) {
             }
             
 
-Suggestions.prototype = {
+Suggestions.propTypes = {
     userId: PropTypes.string,
     following: PropTypes.array,
     loggedInUserDocId: PropTypes.string

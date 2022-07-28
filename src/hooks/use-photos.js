@@ -3,46 +3,25 @@ import UserContext from '../context/user';
 import { getPhotos, getUserByUserId } from "../services/firebase";
 
 
-export default function usePhotos() {
-    const [photos, setPhotos] = useState(null);
+export default function usePhotos(user) {
+  const [photos, setPhotos] = useState(null);
 
-    //const { userId = '' }= useContext(UserContext);
-    
-    const { user: { uid: userId = '' } } = useContext(UserContext);
-   
-    console.log(userId);
-  
-    useEffect(() => {
-      async function getTimelinePhotos() {
-        // does the user actually follow people?
-        const [{ following }] = await getUserByUserId(userId);
-        let followedUserPhotos = [];
-
-        console.log('following', following);
-
-        if (following?.length > 0) {
-            followedUserPhotos = await getPhotos(userId, following);
-
-        }
-            followedUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
-            setPhotos(followedUserPhotos);
-            console.log(followedUserPhotos);
-        
-        
+  useEffect(() => {
+    async function getTimelinePhotos() {
+      // does the user actually follow people?
+      if (user?.following?.length > 0) {
+        const followedUserPhotos = await getPhotos(user.userId, user.following);
+        // re-arrange array to be newest photos first by dateCreated
+        followedUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
+        setPhotos(followedUserPhotos);
       }
-      
-     
-     
-      
-      console.log(userId);
-      getTimelinePhotos();
-      
-    }, [userId]);
+    }
 
-    return { photos };
+    getTimelinePhotos();
+  }, [user?.userId, user?.following]);
 
-    
-  }
+  return { photos };
+}
 
 
 

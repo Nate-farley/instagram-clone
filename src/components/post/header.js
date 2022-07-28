@@ -9,7 +9,7 @@ export default function Header({ username }) {
                 <Link to={`/p/${username}`} className="flex items-center">
                     <img className="rounded-full h-8 w-8 flex mr-3"
                         src={`/images/avatars/${username}.jpg`}
-                        alt={`${username} profile picture`}
+                        alt={`${username} profile pictures`}
                     />
                     <p className="font-bold">{username}</p>
                 </Link>
@@ -20,6 +20,6 @@ export default function Header({ username }) {
 }
 
 
-Header.protoType = {
+Header.propTypes = {
     username: PropTypes.string.isRequired
 };

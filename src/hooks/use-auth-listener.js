@@ -6,12 +6,13 @@ import { useState, useEffect } from 'react';
 export default function useAuthListener() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('authUser')));
     const auth = getAuth();
+    
 
     useEffect(() => {
        
         const listener = onAuthStateChanged(auth, (authUser) => {
             if (authUser) {
-                localStorage.setItem('user', JSON.stringify(authUser));
+                localStorage.setItem('authUser', JSON.stringify(authUser));
                 setUser(authUser);
                 
 
@@ -23,7 +24,8 @@ export default function useAuthListener() {
         });
         return () => listener();
     }, [auth]);
-
+   
+   
     return { user };
 
 }

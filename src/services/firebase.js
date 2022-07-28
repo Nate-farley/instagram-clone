@@ -10,11 +10,11 @@ export async function doesUsernameExist(username) {
 
     const querySnapshot = await getDocs(q);
 
-    console.log(querySnapshot);
+  
 
     const userNames = querySnapshot.docs.length > 0;
 
-    console.log(userNames)
+  
 
    return userNames; 
    
@@ -32,11 +32,15 @@ export async function getUserByUserId(userId) {
     const user = querySnapshot.docs.map((item) => ({
         ...item.data(),
         docId: item.id
+      
+        
+       
+        
     }));
 
 
 
-   console.log(user);
+
 
     return user;
 
@@ -56,7 +60,7 @@ export async function getSuggestedProfiles(userId, following) {
 
     const querySnapshot = await getDocs(q); 
 
-    const profiles = querySnapshot.docs.map((user) => ({ ...user.data,  docId: user.id, ...user.data() }));
+    const profiles = querySnapshot.docs.map((user) => ({ ...user.data(),  docId: user.id,  }));
 
 
    
@@ -100,7 +104,7 @@ export async function updateFollowedUserFollowers(profileDocId, loggedInUserDocI
 
 
 export async function getPhotos(userId, following) {
-    console.log('userId', userId , following );
+  
 
    const photoRef = collection(db, "photos");
 
@@ -115,9 +119,6 @@ export async function getPhotos(userId, following) {
     const userFollowedPhotos = querySnapshot.docs.map((photo) => ({ ...photo.data(),  docId: photo.id, ...photo.data() }));
   
 
-    console.log('following', following );
-    console.log('userId', userId );
-    console.log('userFollowedPhotos', userFollowedPhotos );
 
     const photosWithUserDetails = await Promise.all(
         userFollowedPhotos.map(async (photo) => {
@@ -127,17 +128,17 @@ export async function getPhotos(userId, following) {
           }
           // photo.userId = 2
           const user = await getUserByUserId(photo.userId);
-          console.log(photo.userId);
+       
           // raphael
           const { username } = user[0];
-          console.log(username);
+  
           return { username, ...photo, userLikedPhoto };
           
         })
        
       );
 
-      console.log('photosWithUserDetails', photosWithUserDetails);
+
        
     
       return photosWithUserDetails;

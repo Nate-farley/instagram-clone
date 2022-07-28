@@ -12,9 +12,9 @@ export default function Post({content}) {
 
     const handleFocus = () => commentInput.current.focus();
 
-    console.log('content', content);
+  
 
-    <Header username={content.username} />
+   
 
     return (
 
@@ -31,13 +31,13 @@ export default function Post({content}) {
 
 Post.propTypes = {
     content: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        imageSrc: PropTypes.string.isRequired,
-        caption: PropTypes.string.isRequired,
-        docId: PropTypes.string.isRequired,
-        userLikedPhoto: PropTypes.bool.isRequired,
-        likes: PropTypes.array,
-        comments: PropTypes.array,
-        dateCreated: PropTypes.number
+      username: PropTypes.string,
+      imageSrc: PropTypes.string.isRequired,
+      caption: PropTypes.string.isRequired,
+      docId: PropTypes.string.isRequired,
+      userLikedPhoto: PropTypes.bool.isRequired,
+      likes: PropTypes.array.isRequired,
+      comments: PropTypes.array.isRequired,
+      dateCreated: PropTypes.number.isRequired
     })
-};
+  };

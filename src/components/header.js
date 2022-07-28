@@ -1,14 +1,19 @@
 import React, {useContext} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context/user";
 import * as ROUTES from '../constants/routes';
 import { getAuth, signOut } from "firebase/auth";
+import useUser from '../hooks/use-user';
+
 
 export default function Header() {
-    const { user } = useContext(UserContext);
+    const { user: loggedInUser } = useContext(UserContext);
+    const { user } = useUser(loggedInUser?.uid);
+    //const { user } = useContext(UserContext);
     const auth = getAuth();
+    const history = useNavigate();
 
-
+   
     return (
         <header className="h-16 bg-white border-b border-gray-primary mb-8">
             <div className="container mx-auto max-w-screen-lg h-full">
@@ -21,7 +26,7 @@ export default function Header() {
                         </h1>
                     </div>
                     <div className="text-gray-700 text-center flex items-center align-items">
-                        { user ? (
+                        { loggedInUser ? (
                             <>
                                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                                     <svg
@@ -39,11 +44,10 @@ export default function Header() {
                                         />
                                     </svg>
                                 </Link>
-
                                 <button 
                                     type="button"
                                     title="Sign Out"
-                                    onClick={() => signOut(auth)}
+                                    onClick={() => { signOut(auth); history(ROUTES.LOGIN) }}
                                     onKeyDown={(event) => {
                                         if (event.key === 'Enter') {
                                             signOut(auth);
@@ -66,14 +70,18 @@ export default function Header() {
                                     </svg>
 
                                 </button>
-                                <div className="flex items-center curosr-pointer">
-                                    <Link to={`/p/${user.displayName}`}>
-                                        <img className="rounded-full h-8 w-8 flex"
-                                                src={`/images/avatars/${user.displayName}.jpg`}
-                                                alt={`${user.displayName} profile`}
-                                        />
-                                    </Link>
-                                </div>
+                                {user && (
+                                     <div className="flex items-center cursor-pointer">
+                                        <Link to={`/p/${user?.username}`}>
+                                            <img
+                                                className="rounded-full h-8 w-8 flex"
+                                                src={`/images/avatars/${user?.username}.jpg`}
+                                                alt={`${user?.username} profile`}
+                                        
+                                            />
+                    </Link>
+                  </div>
+                )}
 
 
 

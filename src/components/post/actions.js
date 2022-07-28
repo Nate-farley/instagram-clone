@@ -13,15 +13,15 @@ export default function Action({ docId, totalLikes, likedPhoto, handleFocus}) {
 
     const [likes, setLikes] = useState(totalLikes);
 
+    const toggleLikedRef = doc(db, 'photos', docId);
+
     
     
     const handleToggleLiked = async () => {
 
-      
-
         setToggleLiked((toggleLiked) => !toggleLiked);
 
-        const toggleLikedRef = doc(db, 'photos', docId);
+      
 
         await updateDoc(toggleLikedRef, {
           likes: toggleLiked ? arrayRemove(userId) : arrayUnion(userId)
@@ -91,6 +91,6 @@ export default function Action({ docId, totalLikes, likedPhoto, handleFocus}) {
 Action.propTypes = {
     docId: PropTypes.string.isRequired,
     totalLikes:  PropTypes.number.isRequired,
-    likedPhotos: PropTypes.bool.isRequired,
-    hnadleFocus: PropTypes.func.isRequired
+    likedPhoto: PropTypes.bool.isRequired,
+    handleFocus: PropTypes.func.isRequired
 }
