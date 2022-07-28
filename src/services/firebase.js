@@ -23,6 +23,33 @@ export async function doesUsernameExist(username) {
       
 }
 
+
+export async function getUserByUsername(username) {
+  const q = query(collection(db, 'users'), where('username', '==' , username.toLowerCase()));
+   
+
+    const querySnapshot = await getDocs(q);
+
+    const usernames = querySnapshot.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id
+      
+        
+       
+        
+    }));
+
+
+
+ console.log(usernames);
+
+    return usernames;
+
+
+}
+
+
+
 export async function getUserByUserId(userId) {
     const q = query(collection(db, 'users'), where('userId', '==' , userId));
    

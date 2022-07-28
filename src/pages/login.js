@@ -25,7 +25,7 @@ function Login() {
                 // Signed in 
                
                 const user = userCredential.user;
-                console.log(user);
+
                 history(ROUTES.DASHBOARD);
               })
               .catch(() => {
