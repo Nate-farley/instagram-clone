@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
 
 
 const User = ({ username, fullName }) => {
@@ -18,6 +18,7 @@ const User = ({ username, fullName }) => {
             className="rounded-full w-16 flex mr-3 h-14 w-14"
             src={`/images/avatars/${username}.jpg`}
             alt=""
+            onError={(e) => {e.target.src = DEFAULT_IMAGE_PATH}}
                 />
             </div>
             <div className="col-span-3">

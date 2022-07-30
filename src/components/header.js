@@ -4,6 +4,7 @@ import UserContext from "../context/user";
 import * as ROUTES from '../constants/routes';
 import { getAuth, signOut } from "firebase/auth";
 import useUser from '../hooks/use-user';
+import { DEFAULT_IMAGE_PATH } from '../constants/paths';
 
 
 export default function Header() {
@@ -77,6 +78,7 @@ export default function Header() {
                                                 className="rounded-full h-8 w-8 flex"
                                                 src={`/images/avatars/${user?.username}.jpg`}
                                                 alt={`${user?.username} profile`}
+                                                onError={(e) => {e.target.src = DEFAULT_IMAGE_PATH}}
                                         
                                             />
                     </Link>

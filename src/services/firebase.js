@@ -30,7 +30,7 @@ export async function getUserByUsername(username) {
 
     const querySnapshot = await getDocs(q);
 
-    const usernames = querySnapshot.docs.map((item) => ({
+   return querySnapshot.docs.map((item) => ({
         ...item.data(),
         docId: item.id
       
@@ -41,9 +41,6 @@ export async function getUserByUsername(username) {
 
 
 
- console.log(usernames);
-
-    return usernames;
 
 
 }
@@ -165,13 +162,67 @@ export async function getPhotos(userId, following) {
        
       );
 
-
-       
-    
       return photosWithUserDetails;
     
     }
 
+    export async function getUserPhotosByUserId(userId) {
+
+      const q = query(collection(db, 'photos'), where('userId', '==' , userId));
+   
+
+      const querySnapshot = await getDocs(q);
+  
+      const photos = querySnapshot.docs.map((photo) => ({
+          ...photo.data(),
+          docId: photo.id
+        }));
+
+    return photos;
+    }
+
+  
+    export async function isUserFollowingProfile(loggedInUserUsername, profileUserId) {
+      
+      console.log(loggedInUserUsername);
+      console.log(profileUserId);
+
+
+      const photoColRef = collection(db, 'users');
+
+      const q1 = query(photoColRef, where('username', '==', loggedInUserUsername), where('following', 'array-contains', profileUserId));
+   
+      
+      const querySnapshot = await getDocs(q1);
+    
+      const [ querySnapshots = {}] = querySnapshot.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id,
+        
+      }));
+      
+      console.log(querySnapshots);
+      console.log(querySnapshots.userId);
+      return querySnapshots.userId;
+    }
+    
+    export async function toggleFollow(
+      isFollowingProfile,
+      activeUserDocId,
+      profileDocId,
+      profileUserId,
+      followingUserId
+    ) {
+      // 1st param: karl's doc id
+      // 2nd param: raphael's user id
+      // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
+      await updateLoggedInUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
+    
+      // 1st param: karl's user id
+      // 2nd param: raphael's doc id
+      // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
+      await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
+    }
 
 
 
