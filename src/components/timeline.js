@@ -22,7 +22,7 @@ export default function Timeline() {
   
     const { photos } = usePhotos(user);
    
-   console.log(following);
+  
   
     return (
       <div className="container col-span-2">

@@ -29,7 +29,7 @@ function Signup() {
 
             const usernameExists = await doesUsernameExist(username);
 
-            console.log(usernameExists)
+           
 
             
 
@@ -38,7 +38,7 @@ function Signup() {
               
                 const createdUserResult = await createUserWithEmailAndPassword(auth, emailAddress, password);
 
-                console.log(createdUserResult)
+            
 
                     updateProfile(createdUserResult.user, {
                         displayName: username
@@ -59,7 +59,7 @@ function Signup() {
                         dateCreated: Date.now()
                     });
                         
-                        console.log("Document written with ID: ", docRef.id);
+                      
                         
                         history(ROUTES.DASHBOARD);
 
@@ -73,7 +73,7 @@ function Signup() {
             
                     } else {
                         setError('That username is already taken, please try another.');
-                        console.log('jhvhjjh')
+                      
 
 
         }};

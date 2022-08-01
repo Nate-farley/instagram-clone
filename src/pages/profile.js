@@ -22,8 +22,7 @@ useEffect(() => {
         }
     
         checkUserExists();
-        console.log('user', user);
-        console.log('user', username);
+     
       }, [username, history]);
     
       return user?.username ? (
