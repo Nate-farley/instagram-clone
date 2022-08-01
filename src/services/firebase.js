@@ -184,8 +184,7 @@ export async function getPhotos(userId, following) {
   
     export async function isUserFollowingProfile(loggedInUserUsername, profileUserId) {
       
-      console.log(loggedInUserUsername);
-      console.log(profileUserId);
+  
 
 
       const photoColRef = collection(db, 'users');
@@ -201,8 +200,7 @@ export async function getPhotos(userId, following) {
         
       }));
       
-      console.log(querySnapshots);
-      console.log(querySnapshots.userId);
+      
       return querySnapshots.userId;
     }
     
@@ -224,64 +222,5 @@ export async function getPhotos(userId, following) {
       await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
     }
 
-
-
-/*
-
-
-
-
-
-const photosWithUserDetails = await Promise.all(
-        userFollowedPhotos.map(async (photo) => {
-          let userLikedPhoto = false;
-          if (photo.likes.includes(userId)) {
-            userLikedPhoto = true;
-          }
-          // photo.userId = 2
-          const user = await getUserByUserId(photo.userId);
-          // raphael
-          const { username } = user[0];
-          return { username, ...photo, userLikedPhoto };
-        })
-       
-      );
-
-      console.log('photosWithUserDetails', photosWithUserDetails);
-    
-    
-      return photosWithUserDetails;
-
-
-
-
-const userNames = querySnapshot.docs.length > 0;
-
-const userNames = querySnapshot.docs.map((user) => user.data.length > 0);
-
-
-const userNames = querySnapshot.docs.map((item) => ({
-
-        ...item.data().length > 0
-    
-    
-    }));
-
-
-const q = query(collection(db, 'users'),limit(10));
-    console.log(q)
-
-    const querySnapshot = await getDocs(q); 
-
-    const profileResults = querySnapshot.docs.map((user) => ({ ...user.data(), docId: user.id  }));
-
-    const filterResults = profileResults.filter
-
-    console.log(profileResults);
-    return profileResults;
-
-
-
-    */
 
 

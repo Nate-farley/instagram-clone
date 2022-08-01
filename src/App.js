@@ -41,10 +41,3 @@ function App() {
 
 export default App;
 
-/*
-
- <Route element={<PrivateRoute/>}>
-          <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
-     </Route>
-
-*/

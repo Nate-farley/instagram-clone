@@ -28,33 +28,3 @@ export default function useUser(userId) {
 
 
 
-
-/*
-
-
-export default function useUser() {
-    const [ activeUser, setActiveUser ] = useState({});
-    const  { user }  = useContext(UserContext);
-
-
-    useEffect(() => {
-
-        async function GetUserObjByUserId() {
-        
-            const [response] = await getUserByUserId(user.uid);
-            setActiveUser(response);
-
-        }
-        if (user?.uid) {
-            GetUserObjByUserId();
-        }
-    }, [user]);
-
-    console.log(user);
-
-    return { user: activeUser };
-}
-
-
-*/
-
